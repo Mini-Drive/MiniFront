@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../App/tailwind.config.js"></script>
+    <link rel="stylesheet" href="../../Styles/index.css">
+   
+</head>
+
+<body class="w-full h-auto flex flex-col" onload="GetFolderContent()">
+        <!--Modal para crear carpeta o subir archivo-->
+        <div id="miniMenu" class="absolute hidden bg-white border border-gray-200 rounded-lg shadow-lg">
+            <input type="file" id="file-input" style="display: none;" />
+            <button class="block w-full px-4 py-2 text-left hover:bg-gray-100"  onclick="agregarCarpeta()">Agregar carpeta</button>
+            <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="upload-file" onclick="subirArchivo()">Subir archivo</button>
+        </div>
+
+
+    <!--clase principal para grid-->
+    <section class="w-full h-[100vh] flex flex-col justify-between">
+
+        <!--header con menu-->
+        <header class="w-full h-20">
+            <nav class="w-full h-full p-2 bg-teal-600 text-white">
+                <ul class="w-full h-full flex justify-around">
+                    <li>Inicio</li>
+                    <li>Informacion</li>
+                    <li>Contactos</li>
+                </ul>
+            </nav>
+        </header>
+
+        <!--contenedor para grid-->
+        <div class="text-gray-900 font-sans">
+            <div class="grid grid-cols-12" id="files">
+
+                <div class="container mx-auto py-6 px-4" id="agregar">
+                    <div class="max-w-xs rounded overflow-hidden">
+                        <img class="w-12 h-12 object-cover agregar" id="menuButton" onclick="openMenu(event)" src="https://cdn-icons-png.freepik.com/512/6459/6459958.png"
+                            alt="Sunset in the mountains">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!--Footer de la pagina-->
+        <footer class="w-full h-20 flex">
+            <article class="w-full h-full flex bg-teal-600 text-white">
+                <section class="flex-1 p-2 flex">
+
+                    <ul class="flex-1 flex flex-col justify-around items-center">
+                        <li>Item_2</li>
+                        <li>Item_2</li>
+                        <li>Item_2</li>
+                    </ul>
+
+                </section>
+
+
+                <section class="flex-1 p-2 flex">
+
+                    <ul class="flex-1 flex flex-col justify-around items-center">
+                        <li>Item_2</li>
+                        <li>Item_2</li>
+                        <li>Item_2</li>
+                    </ul>
+
+                </section>
+
+
+                <section class="flex-1 p-2 flex">
+                    <ul class="flex-1 flex flex-col justify-around items-center">
+                        <li>Item_2</li>
+                        <li>Item_2</li>
+                        <li>Item_2</li>
+                    </ul>
+                </section>
+            </article>
+        </footer>
+    </section>
+    <script src="../../App/app.js"></script>
+</body>
+
+</html>
