@@ -134,7 +134,8 @@ function GetFolderContent(){
     
     if(folderId == null){
         //se cambia por el id guardado en sesion storage
-        GetIndexFolder(1);
+        GetIndexFolder(localStorage.getItem("user"));
+        console.log(localStorage.getItem("user"));
     }
     
     else{
@@ -156,7 +157,6 @@ function GetFolderContentByParentId(id){
     fetch(`http://localhost:5155/api/Folders/Byparent/${id}`)
    .then(response => response.json())
    .then(data => {
-    console.log("hola");
         PintarContenidoCarpetas(data);
         GetAllFiles(id);
     });
@@ -167,7 +167,6 @@ function PintarContenidoArchivos(data){
 }
 
 function PintarContenidoCarpetas(data){
-    console.log(data);
     Array.from(data).forEach(element =>{
         const nombreMostrado = element.folderName.length > 5 ? element.folderName.substring(0, 5) + "..." : element.folderName;
         const agregar = document.getElementById("agregar");

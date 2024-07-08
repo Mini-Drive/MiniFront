@@ -19,19 +19,27 @@ function login(event) {
     .then(data => {
         if (data.success) {
             console.log("Login successful");
-            localStorage.setItem("admin", user.value); 
-            location.href = "../templates/Header.html";
+            localStorage.setItem("admin", user.value);
+            localStorage.setItem("user", data.id);
+            console.log(data);
+            // location.href = "../templates/Header.html";
         } else {
             console.log("Login failed");
             if (message) {
-                message.textContent = "Username or password is incorrect";
+                message.textContent = data.message || "Username or password is incorrect";
                 message.style = "color: red; font-weight: bold;";
             }
             user.classList.add("is-invalid");
             password.classList.add("is-invalid");
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        if (message) {
+            message.textContent = "An error occurred during login";
+            message.style = "color: red; font-weight: bold;";
+        }
+    });
 }
 
 btnRegister.addEventListener('click', () => {
