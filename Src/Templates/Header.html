@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../App/tailwind.config.js"></script>
     <link rel="stylesheet" href="../../Styles/index.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
    
 </head>
 
@@ -25,13 +26,41 @@
 
         <!--header con menu-->
         <header class="w-full h-20">
-            <nav class="w-full h-full p-2 bg-teal-600 text-white">
-                <ul class="w-full h-full flex justify-around">
-                    <li>Inicio</li>
-                    <li>Informacion</li>
-                    <li>Contactos</li>
-                </ul>
+            <nav class="w-full h-full p-2 bg-teal-600 text-white flex justify-between items-center">
+                <div class="flex justify-around flex-1">
+                    <button id="basura" class="focus:outline-none">
+                        <img src="../Images/icons8-basura-100.png" alt="" class="w-15 h-12 mr-4">
+                    </button>
+
+                    <h1>Inicio</h1>
+
+                    <button id="sol" class="focus:outline-none">
+                        <img src="../Images/icons8-sol-64.png" alt="" class="w-15 h-12 ml-4">
+                
+                <button class="px-4 py-2  bg-white text-teal-600 rounded hover:bg-gray-100" id="modalCerrar">Cerrar sesión</button>
+            </div>
             </nav>
+
+            <div class="modal" id="logoutModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Cerrar Sesión</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>¿Estás seguro de que quieres cerrar sesión?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-primary" id="confirmLogout">Cerrar Sesión</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
         </header>
 
         <!--contenedor para grid-->
@@ -83,7 +112,11 @@
             </article>
         </footer>
     </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../../App/app.js"></script>
 </body>
 
 </html>
+

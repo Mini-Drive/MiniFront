@@ -278,3 +278,38 @@ document.addEventListener('click', function(event) {
         menu.classList.add('hidden');
     }
 });
+
+let modalCerrar = document.getElementById("modalCerrar");
+
+
+modalCerrar.addEventListener("click", function() {
+    $('#logoutModal').modal('show'); 
+});
+
+document.getElementById("confirmLogout").addEventListener("click", function() {
+    window.location.href = '../pages/login.html'; 
+});
+
+
+
+
+// Función para alternar el tema y cambiar la imagen
+function toggleTheme() {
+    const body = document.body;
+    const themeIcon = document.getElementById('themeIcon');
+
+    if (!body.classList.contains('dark-theme')) {
+        body.classList.add('dark-theme');
+        body.style.backgroundColor = '#333';
+        body.style.color = 'white';
+      
+        themeIcon.src = '../Src/Images/icons8-emoji-de-luna-llena-48.png'; 
+    } else {
+        body.classList.remove('dark-theme');
+        body.style.backgroundColor = '';
+        body.style.color = '';
+        themeIcon.src = '../Images/icons8-sol-64.png';
+    }
+}
+
+document.getElementById('sol').addEventListener('click', toggleTheme);

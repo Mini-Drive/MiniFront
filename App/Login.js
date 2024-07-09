@@ -22,7 +22,7 @@ function login(event) {
             localStorage.setItem("admin", user.value);
             localStorage.setItem("user", data.id);
             console.log(data);
-            // location.href = "../templates/Header.html";
+            location.href = "../templates/Header.html";
         } else {
             console.log("Login failed");
             if (message) {
@@ -43,5 +43,6 @@ function login(event) {
 }
 
 btnRegister.addEventListener('click', () => {
+    
     location.href = "./register.html";
 });
