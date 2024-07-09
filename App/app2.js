@@ -15,7 +15,7 @@ function obtenerFechaActual() {
     window.location.href = url.toString(); // Redirige a la nueva URL con el parámetro actualizado
 }
 
-function cargar(file) {
+/* function cargar(file) {
     if (file) {
         const reader = new FileReader();
         reader.readAsArrayBuffer(file);
@@ -62,7 +62,7 @@ function cargar(file) {
             });
         }
     }
-}
+} */
 
 function GetAllFiles(id){
     console.log(id);
@@ -70,7 +70,7 @@ function GetAllFiles(id){
    .then(response => response.json())
    .then(data => {
         Array.from(data).forEach(element => {
-            if(element.fileExtension.includes("image") && element.status == "ACTIVE"){
+            if(element.fileExtension.includes("image") && element.status == "INACTIVE"){
 
                 const base64String = element.content;
                 const binaryString = atob(base64String);
@@ -96,7 +96,7 @@ function GetAllFiles(id){
                     document.getElementById("files").insertBefore(div, agregar);
             }
 
-            else if(element.fileExtension.includes("pdf") && element.status == "ACTIVE"){
+            else if(element.fileExtension.includes("pdf") && element.status == "INACTIVE"){
                 const nombreMostrado = element.fileName.length > 5 ? element.fileName.substring(0, 5) + "..." : element.fileName;
                     const agregar = document.getElementById("agregar");
                     const div = document.createElement("div");
@@ -110,7 +110,7 @@ function GetAllFiles(id){
                     document.getElementById("files").insertBefore(div, agregar);
             }
 
-            else if(element.fileName.includes("docx") && element.status == "ACTIVE"){
+            else if(element.fileName.includes("docx") && element.status == "INACTIVE"){
                 const nombreMostrado = element.fileName.length > 5 ? element.fileName.substring(0, 5) + "..." : element.fileName;
                     const agregar = document.getElementById("agregar");
                     const div = document.createElement("div");
@@ -173,7 +173,7 @@ function izquierdo(este){
 
 function PintarContenidoCarpetas(data){
     Array.from(data).forEach(element =>{
-        if(element.status == "ACTIVE"){
+        if(element.status == "INACTIVE"){
             const nombreMostrado = element.folderName.length > 5 ? element.folderName.substring(0, 5) + "..." : element.folderName;
             const agregar = document.getElementById("agregar");
             const div = document.createElement("div");
@@ -197,7 +197,7 @@ function GetFolderContentById(id){
     });
 }
 
-function agregar() {
+/* function agregar() {
     const nombreCarpeta = prompt("Ingrese el nombre de la carpeta:");
     if (nombreCarpeta) { // Verificar si el usuario ingresó un nombre
         // Truncar el nombre si es demasiado largo
@@ -236,7 +236,7 @@ function agregar() {
                 }
             });        
     }
-}
+} */
 
 
 
