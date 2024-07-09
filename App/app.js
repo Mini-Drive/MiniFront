@@ -313,3 +313,11 @@ function toggleTheme() {
 }
 
 document.getElementById('sol').addEventListener('click', toggleTheme);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    let trashButton = document.getElementById('basura');
+    trashButton.addEventListener('click', function() {
+        window.location.href = '../pages/Trash.html';
+    });
+});
