@@ -1,3 +1,82 @@
-    .agregar{
-        cursor: pointer;
+body {
+    background-color: #FFEEDA;
+}
+.agregar {
+    cursor: pointer;
+}
+
+.titleNav {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: "Playfair Display", serif;
+}
+
+footer {
+    background-color: #FFEEDA; /* Un tono de teal más claro */
+    color: #844C13 !important;
+}
+
+footer h2 {
+    margin-bottom: 1rem;
+}
+
+footer ul {
+    padding: 0;
+}
+
+footer li {
+    margin-bottom: 0.5rem;
+}
+
+footer a {
+    color: #844C13 !important;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+footer a:hover {
+    color: #e6fffa; /* Un tono más claro para el hover */
+}
+
+/* Ajustes para dispositivos más grandes */
+@media (min-width: 768px) {
+    footer {
+        flex-direction: row;
+        justify-content: space-between;
     }
+
+    footer section {
+        margin: 0 1rem;
+    }
+}
+
+.dark-theme {
+    background-color: #333; 
+    color: #844C13 !important; 
+}
+
+header, footer {
+    background-color: #844C13 !important;
+    color: #FFEEDA !important;
+}
+
+header h1, footer h2, footer a, footer p, footer li {
+    color: #FFEEDA !important;
+}
+
+#modalCerrar {
+    background-color: #D77A1A !important; 
+    color: #FFEEDA !important; 
+}
+
+#modalCerrar:hover {
+    background-color: #6D3F10 !important; 
+}
+
+footer {
+    height: 170px; 
+    overflow: hidden; 
+}
+
+
+

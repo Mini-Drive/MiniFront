@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,136 @@
     <script src="../../App/tailwind.config.js"></script>
     <link rel="stylesheet" href="../../Styles/index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body class="w-full h-auto flex flex-col" onload="GetFolderContent()">
+    <!--Modal para crear carpeta o subir archivo-->
+    <div id="miniMenu" class="absolute hidden bg-white border border-gray-200 rounded-lg shadow-lg">
+        <input type="file" id="file-input" style="display: none;" />
+        <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" onclick="agregarCarpeta()">Agregar carpeta</button>
+        <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="upload-file" onclick="subirArchivo()">Subir archivo</button>
+    </div>
+
+    <!--Modal para crear carpeta o subir archivo-->
+    <div id="miniMenu2" class="absolute hidden bg-white border border-gray-200 rounded-lg shadow-lg">
+        <input type="file" id="file-input" style="display: none;" />
+        <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="edit" onclick="Editarnombre()">Editar</button>
+        <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="delete" onclick="Eliminar()">Eliminar</button>
+    </div>
+
+    <!--clase principal para grid-->
+    <section class="w-full h-[100vh] flex flex-col justify-between">
+        <!--header con menu-->
+        <header class="w-full h-20">
+            <nav class="w-full h-full p-2 flex justify-between items-center">
+                <div class="flex justify-between flex-1">
+                    <div class="titleNav ml-5">
+                        <h1>DataHive</h1>
+                    </div>
+                    <div class="d-flex">
+                        <div class="d-flex">
+                            <a id="basura" class="focus:outline-none agregar" href="./../Pages/trash.html">
+                                <img src="../Images/icons8-basura-100.png" alt="" class="w-15 h-12 mr-4">
+                            </a>
+                            <a id="basura" class="focus:outline-none agregar" href="./../Pages/trash.html">
+                                <img src="../Images/icons8-casa-64.png" alt="" class="w-15 h-12 mr-4">
+                            </a>
+                            <button id="sol" class="focus:outline-none">
+                                <img src="../Images/icons8-emoji-luna-nueva-48.png" alt="" class="w-15 h-12 ml-4">
+                            </button>
+                        </div>
+                        <div>
+                            <button class="px-4 py-2 bg-white text-teal-600 rounded hover:bg-gray-100 ml-5 mr-5" id="modalCerrar">Cerrar sesión</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="modal" id="logoutModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Cerrar Sesión</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estás seguro de que quieres cerrar sesión?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="confirmLogout">Cerrar Sesión</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!--contenedor para grid-->
+        <div class="text-gray-900 font-sans">
+            <div class="grid grid-cols-12" id="files">
+                <div class="container mx-auto py-6 px-4" id="agregar">
+                    <div class="max-w-xs rounded overflow-hidden">
+                        <img class="w-12 h-12 object-cover agregar" id="menuButton" onclick="openMenu(event)" src="../Images/anadir.png" alt="Sunset in the mountains">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Footer de la pagina-->
+        <footer class="w-full h-30 flex">
+            <article class="w-full h-full flex">
+                <section class="flex-1 p-2 flex">
+                    <ul class="flex-1 flex flex-col justify-around items-center">
+                        <li>
+                            <h2>Navegación</h2>
+                        </li>
+                        <li><a href="#">Ayuda</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </section>
+                <section class="flex-1 p-2 flex">
+                    <ul class="flex-1 flex flex-col justify-around items-center">
+                        <li>
+                            <h2>Contacto</h2>
+                        </li>
+                        <li>Email: soporte@minidrive.com</li>
+                        <li>Teléfono: +123-456-7890</li>
+                        <li>
+                            <p>&copy; 2024 MiniDrive. Todos los derechos reservados.</p>
+                        </li>
+                    </ul>
+                </section>
+            </article>
+        </footer>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../App/app.js"></script>
+</body>
+</html>
+
+
+CODIGO DE OTRA pagina--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../App/tailwind.config.js"></script>
+     <link rel="stylesheet" href="../../Styles/index.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body class="w-full h-auto flex flex-col" onload="GetFolderContent()">
@@ -20,93 +148,122 @@
             <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="upload-file" onclick="subirArchivo()">Subir archivo</button>
         </div>
 
+        <!--Modal para crear carpeta o subir archivo-->
+        <div id="miniMenu2" class="absolute hidden bg-white border border-gray-200 rounded-lg shadow-lg">
+            <input type="file" id="file-input" style="display: none;" />
+            <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="edit" onclick="Editarnombre()">Editar</button>
+            <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="delete" onclick="Eliminar()">Eliminar</button>
+        </div>
+
 
     <!--clase principal para grid-->
     <section class="w-full h-[100vh] flex flex-col justify-between">
 
         <!--header con menu-->
-        <header class="w-full h-20">
+         <header class="w-full h-20">
             <nav class="w-full h-full p-2 bg-teal-600 text-white flex justify-between items-center">
-                <div class="flex justify-around flex-1">
-                    <button id="basura" class="focus:outline-none">
-                        <img src="../Images/icons8-basura-100.png" alt="" class="w-15 h-12 mr-4">
-                    </button>
+                <div class="flex justify-between flex-1">
 
-                    <h1>Inicio</h1>
 
-                    <button id="sol" class="focus:outline-none">
-                        <img src="../Images/icons8-sol-64.png" alt="" class="w-15 h-12 ml-4">
-                
-                <button class="px-4 py-2  bg-white text-teal-600 rounded hover:bg-gray-100" id="modalCerrar">Cerrar sesión</button>
-            </div>
+                    <div class="titleNav ml-5">
+                        <h1>DataHive</h1>
+                    </div>
+
+
+                    <div class="d-flex ">
+
+
+                        <div class="d-flex">
+                            <a id="basura" class="focus:outline-none agregar" href="./../Pages/trash.html">
+                                <img src="../Images/icons8-basura-100.png" alt="" class="w-15 h-12 mr-4">
+                            </a>
+
+                            <a id="casa" class="focus:outline-none agregar" href="./../Templates/Header.html">
+                                <img src="../Images/icons8-casa-64.png" alt="" class="w-15 h-12 mr-4">
+                            </a>
+
+                            <button id="sol" class="focus:outline-none">
+                                <img src="../Images/icons8-sol-64.png" alt="" class="w-15 h-12 ml-4">
+                            </button>
+                        </div>
+                        <div>
+                            <button class="px-4 py-2  bg-white text-teal-600 rounded hover:bg-gray-100 ml-5 mr-5"
+                                id="modalCerrar">Cerrar sesión</button>
+                        </div>
+
+
+                    </div>
+
+                </div>
             </nav>
+
 
             <div class="modal" id="logoutModal">
                 <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Cerrar Sesión</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Cerrar Sesión</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estás seguro de que quieres cerrar sesión?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="confirmLogout">Cerrar Sesión</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                      <p>¿Estás seguro de que quieres cerrar sesión?</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button type="button" class="btn btn-primary" id="confirmLogout">Cerrar Sesión</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
-        
+            </div>
+
         </header>
 
         <!--contenedor para grid-->
         <div class="text-gray-900 font-sans">
             <div class="grid grid-cols-12" id="files">
 
-                <div class="container mx-auto py-6 px-4" id="agregar">
+               <!--  <div class="container mx-auto py-6 px-4" id="agregar">
                     <div class="max-w-xs rounded overflow-hidden">
                         <img class="w-12 h-12 object-cover agregar" id="menuButton" onclick="openMenu(event)" src="https://cdn-icons-png.freepik.com/512/6459/6459958.png"
                             alt="Sunset in the mountains">
                     </div>
-                </div>
+                </div> -->
                 
             </div>
         </div>
 
-        <!--Footer de la pagina-->
-        <footer class="w-full h-20 flex">
+        <footer class="w-full h-30 flex">
             <article class="w-full h-full flex bg-teal-600 text-white">
+
                 <section class="flex-1 p-2 flex">
 
                     <ul class="flex-1 flex flex-col justify-around items-center">
-                        <li>Item_2</li>
-                        <li>Item_2</li>
-                        <li>Item_2</li>
+
+                        <li>
+                            <h2>Navegación</h2>
+                        </li>
+                        <li><a href="#">Ayuda</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+
                     </ul>
 
                 </section>
 
 
                 <section class="flex-1 p-2 flex">
-
                     <ul class="flex-1 flex flex-col justify-around items-center">
-                        <li>Item_2</li>
-                        <li>Item_2</li>
-                        <li>Item_2</li>
-                    </ul>
+                        <li>
+                            <h2>Contacto</h2>
+                        </li>
+                        <li>Email: soporte@minidrive.com</li>
+                        <li>Teléfono: +123-456-7890</li>
+                        <li>
+                            <p>&copy; 2024 MiniDrive. Todos los derechos reservados.</p>
+                        </li>
 
-                </section>
-
-
-                <section class="flex-1 p-2 flex">
-                    <ul class="flex-1 flex flex-col justify-around items-center">
-                        <li>Item_2</li>
-                        <li>Item_2</li>
-                        <li>Item_2</li>
                     </ul>
                 </section>
             </article>
@@ -115,7 +272,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../../App/app.js"></script>
+    <script src="../../App/app2.js"></script>
 </body>
 
 </html>

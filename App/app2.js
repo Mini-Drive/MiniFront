@@ -15,7 +15,7 @@ function obtenerFechaActual() {
     window.location.href = url.toString(); // Redirige a la nueva URL con el parámetro actualizado
 }
 
-function cargar(file) {
+/* function cargar(file) {
     if (file) {
         const reader = new FileReader();
         reader.readAsArrayBuffer(file);
@@ -62,7 +62,7 @@ function cargar(file) {
             });
         }
     }
-}
+} */
 
 function GetAllFiles(id){
     console.log(id);
@@ -70,7 +70,7 @@ function GetAllFiles(id){
    .then(response => response.json())
    .then(data => {
         Array.from(data).forEach(element => {
-            if(element.fileExtension.includes("image") && element.status == "ACTIVE"){
+            if(element.fileExtension.includes("image") && element.status == "INACTIVE"){
 
                 const base64String = element.content;
                 const binaryString = atob(base64String);
@@ -96,7 +96,7 @@ function GetAllFiles(id){
                     document.getElementById("files").insertBefore(div, agregar);
             }
 
-            else if(element.fileExtension.includes("pdf") && element.status == "ACTIVE"){
+            else if(element.fileExtension.includes("pdf") && element.status == "INACTIVE"){
                 const nombreMostrado = element.fileName.length > 5 ? element.fileName.substring(0, 5) + "..." : element.fileName;
                     const agregar = document.getElementById("agregar");
                     const div = document.createElement("div");
@@ -110,7 +110,7 @@ function GetAllFiles(id){
                     document.getElementById("files").insertBefore(div, agregar);
             }
 
-            else if(element.fileName.includes("docx") && element.status == "ACTIVE"){
+            else if(element.fileName.includes("docx") && element.status == "INACTIVE"){
                 const nombreMostrado = element.fileName.length > 5 ? element.fileName.substring(0, 5) + "..." : element.fileName;
                     const agregar = document.getElementById("agregar");
                     const div = document.createElement("div");
@@ -173,14 +173,14 @@ function izquierdo(este){
 
 function PintarContenidoCarpetas(data){
     Array.from(data).forEach(element =>{
-        if(element.status == "ACTIVE"){
+        if(element.status == "INACTIVE"){
             const nombreMostrado = element.folderName.length > 5 ? element.folderName.substring(0, 5) + "..." : element.folderName;
             const agregar = document.getElementById("agregar");
             const div = document.createElement("div");
             div.classList.add("container", "py-6", "px-4");
             div.innerHTML = `
                 <div class="max-w-xs rounded overflow-hidden">
-                    <img class="w-12 h-12 object-cover agregar" onclick="redirigir(${element.id})" oncontextmenu="openMenu2(event, this, ${element.id})" data-type="folder" src="../Images/carpeta.png"
+                    <img class="w-12 h-12 object-cover agregar" onclick="redirigir(${element.id})" oncontextmenu="openMenu2(event, this, ${element.id})" data-type="folder" src="../Images/folder.webp"
                         alt="Icono de carpeta">
                     <div class=" mt-2" title="${element.folderName}">${nombreMostrado} </div>
                 </div>`;
@@ -197,7 +197,7 @@ function GetFolderContentById(id){
     });
 }
 
-function agregar() {
+/* function agregar() {
     const nombreCarpeta = prompt("Ingrese el nombre de la carpeta:");
     if (nombreCarpeta) { // Verificar si el usuario ingresó un nombre
         // Truncar el nombre si es demasiado largo
@@ -236,7 +236,7 @@ function agregar() {
                 }
             });        
     }
-}
+} */
 
 
 
@@ -371,6 +371,8 @@ document.getElementById("confirmLogout").addEventListener("click", function() {
 });
 
 
+
+
 // Función para alternar el tema y cambiar la imagen
 function toggleTheme() {
     const body = document.body;
@@ -386,11 +388,3 @@ function toggleTheme() {
 }
 
 document.getElementById('sol').addEventListener('click', toggleTheme);
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    let trashButton = document.getElementById('basura');
-    trashButton.addEventListener('click', function() {
-        window.location.href = '../pages/Trash.html';
-    });
-});

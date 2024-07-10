@@ -19,7 +19,7 @@ function register(event) {
         return; 
     }
 
-    fetch('http://localhost:5155/api/Users/Register', {
+    fetch('http://datahive.somee.com/api/Users/Register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
