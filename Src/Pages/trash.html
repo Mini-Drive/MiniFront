@@ -7,9 +7,12 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../App/tailwind.config.js"></script>
-    <link rel="stylesheet" href="../../Styles/index.css">
+     <link rel="stylesheet" href="../../Styles/index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body class="w-full h-auto flex flex-col" onload="GetFolderContent()">
@@ -33,41 +36,63 @@
 
         <!--header con menu-->
         <header class="w-full h-20">
-            <nav class="w-full h-full p-2 bg-teal-600 text-white flex justify-between items-center">
-                <div class="flex justify-around flex-1">
-                    <a id="basura" class="focus:outline-none agregar" href="./../Pages/trash.html">
-                        <img src="../Images/icons8-basura-100.png" alt="" class="w-15 h-12 mr-4">
-                    </a>
+            <nav class="w-full h-full p-2  flex justify-between items-center">
+                <div class="flex justify-between flex-1">
 
-                    <h1>Inicio</h1>
 
-                    <button id="sol" class="focus:outline-none">
-                        <img src="../Images/icons8-sol-64.png" alt="" class="w-15 h-12 ml-4">
-                
-                <button class="px-4 py-2  bg-white text-teal-600 rounded hover:bg-gray-100" id="modalCerrar">Cerrar sesión</button>
-            </div>
+                    <div class="titleNav ml-5">
+                        <h1>DataHive</h1>
+                    </div>
+
+
+                    <div class="d-flex ">
+
+
+                        <div class="d-flex">
+                            <a id="basura" class="focus:outline-none agregar" href="./../Pages/trash.html">
+                                <img src="../Images/icons8-basura-100.png" alt="" class="w-15 h-12 mr-4">
+                            </a>
+
+                            <a id="casa" class="focus:outline-none agregar" href="./../Templates/Header.html">
+                                <img src="../Images/icons8-casa-64.png" alt="" class="w-15 h-12 mr-4">
+                            </a>
+
+                            <button id="sol" class="focus:outline-none">
+                                <img src="../Images/icons8-emoji-luna-nueva-48.png" alt="" class="w-15 h-12 ml-4">
+                            </button>
+                        </div>
+                        <div>
+                            <button class="px-4 py-2  bg-white text-teal-600 rounded hover:bg-gray-100 ml-5 mr-5"
+                                id="modalCerrar">Cerrar sesión</button>
+                        </div>
+
+
+                    </div>
+
+                </div>
             </nav>
+
 
             <div class="modal" id="logoutModal">
                 <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Cerrar Sesión</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Cerrar Sesión</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estás seguro de que quieres cerrar sesión?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="confirmLogout">Cerrar Sesión</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                      <p>¿Estás seguro de que quieres cerrar sesión?</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button type="button" class="btn btn-primary" id="confirmLogout">Cerrar Sesión</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
-        
+            </div>
+
         </header>
 
         <!--contenedor para grid-->
@@ -84,36 +109,36 @@
             </div>
         </div>
 
-        <!--Footer de la pagina-->
-        <footer class="w-full h-20 flex">
-            <article class="w-full h-full flex bg-teal-600 text-white">
+        <footer class="w-full h-30 flex">
+            <article class="w-full h-full flex ">
+
                 <section class="flex-1 p-2 flex">
 
                     <ul class="flex-1 flex flex-col justify-around items-center">
-                        <li>Item_2</li>
-                        <li>Item_2</li>
-                        <li>Item_2</li>
+
+                        <li>
+                            <h2>Navegación</h2>
+                        </li>
+                        <li><a href="#">Ayuda</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+
                     </ul>
 
                 </section>
 
 
                 <section class="flex-1 p-2 flex">
-
                     <ul class="flex-1 flex flex-col justify-around items-center">
-                        <li>Item_2</li>
-                        <li>Item_2</li>
-                        <li>Item_2</li>
-                    </ul>
+                        <li>
+                            <h2>Contacto</h2>
+                        </li>
+                        <li>Email: soporte@minidrive.com</li>
+                        <li>Teléfono: +123-456-7890</li>
+                        <li>
+                            <p>&copy; 2024 MiniDrive. Todos los derechos reservados.</p>
+                        </li>
 
-                </section>
-
-
-                <section class="flex-1 p-2 flex">
-                    <ul class="flex-1 flex flex-col justify-around items-center">
-                        <li>Item_2</li>
-                        <li>Item_2</li>
-                        <li>Item_2</li>
                     </ul>
                 </section>
             </article>

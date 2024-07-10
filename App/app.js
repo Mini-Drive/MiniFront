@@ -180,7 +180,7 @@ function PintarContenidoCarpetas(data){
             div.classList.add("container", "py-6", "px-4");
             div.innerHTML = `
                 <div class="max-w-xs rounded overflow-hidden">
-                    <img class="w-12 h-12 object-cover agregar" onclick="redirigir(${element.id})" oncontextmenu="openMenu2(event, this, ${element.id})" data-type="folder" src="../Images/folder.webp"
+                    <img class="w-12 h-12 object-cover agregar" onclick="redirigir(${element.id})" oncontextmenu="openMenu2(event, this, ${element.id})" data-type="folder" src="../Images/carpeta.png"
                         alt="Icono de carpeta">
                     <div class=" mt-2" title="${element.folderName}">${nombreMostrado} </div>
                 </div>`;
@@ -371,24 +371,17 @@ document.getElementById("confirmLogout").addEventListener("click", function() {
 });
 
 
-
-
 // Función para alternar el tema y cambiar la imagen
 function toggleTheme() {
     const body = document.body;
-    const themeIcon = document.getElementById('themeIcon');
+    const themeIcon = document.getElementById('sol').getElementsByTagName('img')[0]; 
 
     if (!body.classList.contains('dark-theme')) {
         body.classList.add('dark-theme');
-        body.style.backgroundColor = '#333';
-        body.style.color = 'white';
-      
-        themeIcon.src = '../Src/Images/icons8-emoji-de-luna-llena-48.png'; 
+        themeIcon.src = '../Images/icons8-emoji-de-luna-llena-48.png'; // Cambia a la imagen de la luna
     } else {
         body.classList.remove('dark-theme');
-        body.style.backgroundColor = '';
-        body.style.color = '';
-        themeIcon.src = '../Images/icons8-sol-64.png';
+        themeIcon.src = '../Images/icons8-emoji-luna-nueva-48.png'; // Cambia de nuevo a la imagen del sol
     }
 }
 
