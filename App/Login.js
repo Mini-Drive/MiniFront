@@ -22,7 +22,7 @@ function login(event) {
             localStorage.setItem("admin", user.value);
             localStorage.setItem("user", data.id);
             console.log(data);
-            location.href = "../templates/Header.html";
+            location.href = "./../Templates/Header.html";
         } else {
             console.log("Login failed");
             if (message) {

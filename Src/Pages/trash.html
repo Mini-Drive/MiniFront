@@ -15,7 +15,7 @@
         rel="stylesheet">
 </head>
 
-<body class="w-full h-auto flex flex-col" onload="GetFolderContent()">
+<body class="w-full h-auto flex flex-col" onload="GetFolderContentByParentId()">
         <!--Modal para crear carpeta o subir archivo-->
         <div id="miniMenu" class="absolute hidden bg-white border border-gray-200 rounded-lg shadow-lg">
             <input type="file" id="file-input" style="display: none;" />
@@ -26,7 +26,7 @@
         <!--Modal para crear carpeta o subir archivo-->
         <div id="miniMenu2" class="absolute hidden bg-white border border-gray-200 rounded-lg shadow-lg">
             <input type="file" id="file-input" style="display: none;" />
-            <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="edit" onclick="Editarnombre()">Editar</button>
+            <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="edit" onclick="Recuperar()">Recuperar</button>
             <button class="block w-full px-4 py-2 text-left hover:bg-gray-100" id="delete" onclick="Eliminar()">Eliminar</button>
         </div>
 

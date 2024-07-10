@@ -44,7 +44,7 @@ function cargar(file) {
 
             console.log(JSON.stringify(datosNuevos));
 
-            fetch('http://datahive.somee.com/api/files', {
+            fetch('DataHive.somee.com/api/files', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -66,7 +66,7 @@ function cargar(file) {
 
 function GetAllFiles(id){
     console.log(id);
-    fetch(`http://datahive.somee.com/api/files/byfolderid/${id}`)
+    fetch(`DataHive.somee.com/api/files/byfolderid/${id}`)
    .then(response => response.json())
    .then(data => {
         Array.from(data).forEach(element => {
@@ -144,7 +144,7 @@ function GetFolderContent(){
     }
 }
 function GetIndexFolder(id){
-    fetch(`http://datahive.somee.com/api/Folders/index/${id}`)
+    fetch(`DataHive.somee.com/api/Folders/index/${id}`)
    .then(response => response.json())
    .then(data => {
         //console.log(data);
@@ -154,7 +154,7 @@ function GetIndexFolder(id){
 }
 
 function GetFolderContentByParentId(id){
-    fetch(`http://datahive.somee.com/api/Folders/Byparent/${id}`)
+    fetch(`DataHive.somee.com/api/Folders/Byparent/${id}`)
    .then(response => response.json())
    .then(data => {
         PintarContenidoCarpetas(data);
@@ -190,7 +190,7 @@ function PintarContenidoCarpetas(data){
 }
 
 function GetFolderContentById(id){
-    fetch(`http://datahive.somee.com/api/Folders/Byid/${id}`)
+    fetch(`DataHive.somee.com/api/Folders/Byid/${id}`)
    .then(response => response.json())
    .then(data => {
         console.log(data);
@@ -212,7 +212,7 @@ function agregar() {
         }
         const idcarpeta = 0;
 
-        fetch('http://datahive.somee.com/api/Folders', {
+        fetch('DataHive.somee.com/api/Folders', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -287,7 +287,7 @@ function Eliminar(tipo, id){
         punto = "files";
     }
     obj = {}
-    fetch(`http://datahive.somee.com/api/${punto}/${id}`, {
+    fetch(`DataHive.somee.com/api/${punto}/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -318,7 +318,7 @@ function Editarnombre(tipo, id){
         obj.FileName = nombreCarpeta;
         punto = "Files";
     }
-    fetch(`http://datahive.somee.com/api/${punto}/${id}`, {
+    fetch(`DataHive.somee.com/api/${punto}/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"

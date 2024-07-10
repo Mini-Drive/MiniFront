@@ -44,7 +44,7 @@ function obtenerFechaActual() {
 
             console.log(JSON.stringify(datosNuevos));
 
-            fetch('http://datahive.somee.com/api/files', {
+            fetch('DataHive.somee.com/api/files', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -66,7 +66,7 @@ function obtenerFechaActual() {
 
 function GetAllFiles(id){
     console.log(id);
-    fetch(`http://datahive.somee.com/api/files/byfolderid/${id}`)
+    fetch(`DataHive.somee.com/api/files/byfolderid/${id}`)
    .then(response => response.json())
    .then(data => {
         Array.from(data).forEach(element => {
@@ -127,34 +127,11 @@ function GetAllFiles(id){
     });
 }
 
-function GetFolderContent(){
-    const url = new URL(window.location.href);
-    const param = new URLSearchParams(url.search);
-    const folderId = param.get('FolderId');
-    
-    if(folderId == null){
-        //se cambia por el id guardado en sesion storage
-        GetIndexFolder(localStorage.getItem("user"));
-        console.log(localStorage.getItem("user"));
-    }
-    
-    else{
-        GetFolderContentByParentId(folderId);
-        localStorage.setItem("carpeta", folderId);
-    }
-}
-function GetIndexFolder(id){
-    fetch(`http://datahive.somee.com/api/Folders/index/${id}`)
-   .then(response => response.json())
-   .then(data => {
-        //console.log(data);
-        GetFolderContentByParentId(data.id);
-        localStorage.setItem("carpeta", data.id);
-    });
-}
 
-function GetFolderContentByParentId(id){
-    fetch(`http://datahive.somee.com/api/Folders/Byparent/${id}`)
+
+function GetFolderContentByParentId(){
+    let id = localStorage.getItem("user");
+    fetch(`DataHive.somee.com/api/Folders/${id}`)
    .then(response => response.json())
    .then(data => {
         PintarContenidoCarpetas(data);
@@ -190,7 +167,7 @@ function PintarContenidoCarpetas(data){
 }
 
 function GetFolderContentById(id){
-    fetch(`http://datahive.somee.com/api/Folders/Byid/${id}`)
+    fetch(`DataHive.somee.com/api/Folders/Byid/${id}`)
    .then(response => response.json())
    .then(data => {
         console.log(data);
@@ -212,7 +189,7 @@ function GetFolderContentById(id){
         }
         const idcarpeta = 0;
 
-        fetch('http://datahive.somee.com/api/Folders', {
+        fetch('DataHive.somee.com/api/Folders', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -264,7 +241,7 @@ function openMenu2(event, element, id) {
     const delet = document.getElementById("delete");
     let tipo = element.dataset.type;
 
-    edit.setAttribute("onclick", `Editarnombre("${tipo}", ${id})`);
+    edit.setAttribute("onclick", `Recuperar("${tipo}", ${id})`);
     delet.setAttribute("onclick", `Eliminar("${tipo}", ${id})`);
 }
 
@@ -279,6 +256,10 @@ function subirArchivo() {
 
 function Eliminar(tipo, id){
     let punto = "";
+    let obj = {
+        id: id,
+        status : "TRASH"
+    };
 
     if(tipo == "folder"){
         punto = "Folders";
@@ -286,39 +267,36 @@ function Eliminar(tipo, id){
     else{
         punto = "files";
     }
-    obj = {}
-    fetch(`http://datahive.somee.com/api/${punto}/${id}`, {
-                method: "DELETE",
+    fetch(`DataHive.somee.com/api/${punto}/${id}`, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(obj)
             }).then(response => {
-                return response.json();
+                return response.json(obj);
             }).then(data => {
                 console.log(data);
                 location.reload();
             });
 }
 
-function Editarnombre(tipo, id){
-    const nombreCarpeta = prompt("Ingrese el nuevo nombre de la carpeta:");
+function Recuperar(tipo, id){
 
     let punto = "";
 
     let obj = {
         id: id,
+        status : "ACTIVE"
     };
 
     if(tipo == "folder"){
-        obj.FolderName = nombreCarpeta;
         punto = "Folders";
     }
     else{
-        obj.FileName = nombreCarpeta;
         punto = "Files";
     }
-    fetch(`http://datahive.somee.com/api/${punto}/${id}`, {
+    fetch(`DataHive.somee.com/api/${punto}/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
